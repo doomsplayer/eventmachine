@@ -171,14 +171,15 @@ EventMachine_t::~EventMachine_t()
 {
 	// Run down descriptors
 	size_t i;
-	sort( NewDescriptors.begin(), NewDescriptors.end() );
-        NewDescriptors.erase( unique( NewDescriptors.begin(), NewDescriptors.end() ), NewDescriptors.end() );
 	for (i = 0; i < NewDescriptors.size(); i++)
-		delete NewDescriptors[i];
-	sort( Descriptors.begin(), Descriptors.end() );
-        Descriptors.erase( unique( Descriptors.begin(), Descriptors.end() ), Descriptors.end() );
+	        if (*((void*) *NewDescriptors[i])) != 0) {
+	                delete NewDescriptors[i];	
+	        };
+		
 	for (i = 0; i < Descriptors.size(); i++)
-		delete Descriptors[i];
+	        if (*((void*) *Descriptors[i])) != 0) {
+	                delete Descriptors[i];	
+	        };
 
 	close (LoopBreakerReader);
 	close (LoopBreakerWriter);

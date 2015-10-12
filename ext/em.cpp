@@ -172,12 +172,12 @@ EventMachine_t::~EventMachine_t()
 	// Run down descriptors
 	size_t i;
 	for (i = 0; i < NewDescriptors.size(); i++)
-	        if (*((void*) *NewDescriptors[i])) != 0) {
+	        if (*((void*) *(void*)NewDescriptors[i])) != 0) {
 	                delete NewDescriptors[i];	
 	        };
 		
 	for (i = 0; i < Descriptors.size(); i++)
-	        if (*((void*) *Descriptors[i])) != 0) {
+	        if (*((void*) *(void*)Descriptors[i])) != 0) {
 	                delete Descriptors[i];	
 	        };
 

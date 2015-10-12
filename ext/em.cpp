@@ -170,8 +170,12 @@ EventMachine_t::~EventMachine_t()
 {
 	// Run down descriptors
 	size_t i;
+	for (i=0; i < NewDescriptors.size(); i++)
+	    printf("deleting new descriptors: %p\n", NewDescriptors[i]);
 	for (i = 0; i < NewDescriptors.size(); i++)
 		delete NewDescriptors[i];
+	for (i=0; i < Descriptors.size(); i++)
+	    printf("deleting descriptors: %p\n", Descriptors[i]);
 	for (i = 0; i < Descriptors.size(); i++)
 		delete Descriptors[i];
 

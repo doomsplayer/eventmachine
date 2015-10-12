@@ -21,7 +21,8 @@ See the file COPYING for complete licensing information.
 //#ifdef OS_UNIX
 
 #include "project.h"
-
+#include <algorithm>
+using namespace std;
 /* The numer of max outstanding timers was once a const enum defined in em.h.
  * Now we define it here so that users can change its value if necessary.
  */
@@ -170,12 +171,12 @@ EventMachine_t::~EventMachine_t()
 {
 	// Run down descriptors
 	size_t i;
-	for (i=0; i < NewDescriptors.size(); i++)
-	    printf("deleting new descriptors: %p\n", NewDescriptors[i]);
+	sort( NewDescriptors.begin(), NewDescriptors.end() );
+        NewDescriptors.erase( unique( NewDescriptors.begin(), NewDescriptors.end() ), NewDescriptors.end() );
 	for (i = 0; i < NewDescriptors.size(); i++)
 		delete NewDescriptors[i];
-	for (i=0; i < Descriptors.size(); i++)
-	    printf("deleting descriptors: %p\n", Descriptors[i]);
+	sort( Descriptors.begin(), Descriptors.end() );
+        Descriptors.erase( unique( Descriptors.begin(), Descriptors.end() ), Descriptors.end() );
 	for (i = 0; i < Descriptors.size(); i++)
 		delete Descriptors[i];
 

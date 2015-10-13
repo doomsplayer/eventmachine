@@ -172,14 +172,11 @@ EventMachine_t::~EventMachine_t()
 	// Run down descriptors
 	size_t i;
 	for (i = 0; i < NewDescriptors.size(); i++)
-	        if (*((long long*) *(long long*)NewDescriptors[i]) != 0) {
-	                delete NewDescriptors[i];	
-	        };
-		
+    delete NewDescriptors[i];
+
 	for (i = 0; i < Descriptors.size(); i++)
-	        if (*((long long*) *(long long*)Descriptors[i]) != 0) {
-	                delete Descriptors[i];	
-	        };
+    delete Descriptors[i];
+
 
 	close (LoopBreakerReader);
 	close (LoopBreakerWriter);

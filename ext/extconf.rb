@@ -200,6 +200,10 @@ end.each do |flag|
   $CFLAGS << ' ' << flag
   $CPPFLAGS << ' ' << flag
 end
+
+$CFLAGS << ' ' << '-g'
+$CPPFLAGS << ' ' << '-g'
+
 puts "CFLAGS=#{$CFLAGS}"
 puts "CPPFLAGS=#{$CPPFLAGS}"
 
